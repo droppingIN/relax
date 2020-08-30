@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>com.on.relax.your.eyes.logic</RootNamespace>
+    <AssemblyName>com.on.relax.your.eyes.logic</AssemblyName>
+  </PropertyGroup>
+
+</Project>

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.on.relax.your.eyes.xam.MainPage">
+    <ContentPage.Resources>
+        <Color x:Key="Light">LightGreen</Color>
+        <Color x:Key="Dark">Darkslategray</Color>
+    </ContentPage.Resources>
+    <StackLayout
+        BackgroundColor="{AppThemeBinding
+            Light={StaticResource Light},
+            Dark={StaticResource Dark}
+        }">
+        <Label
+            Text="Hello!"
+            HorizontalTextAlignment="Center"
+            TextColor="{AppThemeBinding
+                Light={StaticResource Dark},
+                Dark={StaticResource Light}
+            }"
+            FontSize="42">
+        </Label>
+    </StackLayout>
+
+</ContentPage>
