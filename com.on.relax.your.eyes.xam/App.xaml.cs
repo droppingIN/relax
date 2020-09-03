@@ -1,4 +1,4 @@
-﻿using Xamarin.Forms;
+using Xamarin.Forms;
 
 namespace com.on.relax.your.eyes.xam
 {
@@ -8,7 +8,7 @@ namespace com.on.relax.your.eyes.xam
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new WorkPage());
         }
 
         protected override void OnStart()
