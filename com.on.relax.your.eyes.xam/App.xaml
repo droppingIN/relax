@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="com.on.relax.your.eyes.xam.App">
     <Application.Resources>
-
+        <Color x:Key="Primary">White</Color>
+        <Color x:Key="Secondary">Darkslategray</Color>
     </Application.Resources>
 </Application>
