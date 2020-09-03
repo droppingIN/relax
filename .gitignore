@@ -3,4 +3,5 @@
 bin/
 obj/
 *.user
-*Resource.designer.cs
+Resource.designer.cs
+Strings.Designer.cs
