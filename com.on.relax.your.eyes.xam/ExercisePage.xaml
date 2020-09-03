@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.on.relax.your.eyes.xam.ExercisePage"
+             BindingContext="{Binding Source={RelativeSource Self}, Path=CurrentExcercise}"
+             BackgroundColor="{StaticResource Primary}">
+    <ContentPage.Resources>
+        <x:Double x:Key="FontSize">42</x:Double>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <!--
+            <Image>
+                <Image.Source>
+                    <FileImageSource File="{Binding PathToResource}"/>
+                </Image.Source>
+            </Image>
+            -->
+            <Label Text="{Binding Description}"
+                   TextColor="{StaticResource Secondary}"
+                   FontSize="{x:StaticResource FontSize}"/>
+            <Label Text="{Binding Comment}"
+                   TextColor="{StaticResource Secondary}"
+                   FontSize="{x:StaticResource FontSize}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
