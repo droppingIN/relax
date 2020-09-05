@@ -155,4 +155,22 @@
   <data name="Continue" xml:space="preserve">
     <value>Weiter</value>
   </data>
+  <data name="Exercise" xml:space="preserve">
+    <value>Übung</value>
+  </data>
+  <data name="ExerciseSuggested" xml:space="preserve">
+    <value>Übung vorgeschlagen</value>
+  </data>
+  <data name="Off" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="On" xml:space="preserve">
+    <value>An</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>Pause</value>
+  </data>
+  <data name="Unknown" xml:space="preserve">
+    <value>Unbekannt</value>
+  </data>
 </root>
