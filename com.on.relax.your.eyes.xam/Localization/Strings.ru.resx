@@ -126,4 +126,31 @@
   <data name="TapToContinue" xml:space="preserve">
     <value>нажмите чтобы продолжить</value>
   </data>
+  <data name="PauseBegin" xml:space="preserve">
+    <value>Перерыв</value>
+  </data>
+  <data name="PauseEnd" xml:space="preserve">
+    <value>Снова за работу</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Закончить</value>
+  </data>
+  <data name="ExerciseSuggest" xml:space="preserve">
+    <value>Время для упражнений</value>
+  </data>
+  <data name="ExerciseAccept" xml:space="preserve">
+    <value>Начать упражнения</value>
+  </data>
+  <data name="ExercisePostpone" xml:space="preserve">
+    <value>Не сейчас</value>
+  </data>
+  <data name="ExerciseEnd" xml:space="preserve">
+    <value>Закончить упражнения</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
 </root>

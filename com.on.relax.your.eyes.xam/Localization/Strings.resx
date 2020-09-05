@@ -128,4 +128,31 @@
   <data name="TapToContinue" xml:space="preserve">
     <value>tap to continue</value>
   </data>
+  <data name="PauseBegin" xml:space="preserve">
+    <value>Do a break</value>
+  </data>
+  <data name="PauseEnd" xml:space="preserve">
+    <value>Back to work</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Stop</value>
+  </data>
+  <data name="ExerciseSuggest" xml:space="preserve">
+    <value>Lets do some yes gym</value>
+  </data>
+  <data name="ExerciseAccept" xml:space="preserve">
+    <value>Start gym</value>
+  </data>
+  <data name="ExercisePostpone" xml:space="preserve">
+    <value>Not now</value>
+  </data>
+  <data name="ExerciseEnd" xml:space="preserve">
+    <value>End gym</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
 </root>

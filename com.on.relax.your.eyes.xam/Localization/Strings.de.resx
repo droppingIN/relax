@@ -128,4 +128,31 @@
   <data name="TapToContinue" xml:space="preserve">
     <value>drücken zum wetergehen</value>
   </data>
+  <data name="PauseBegin" xml:space="preserve">
+    <value>Pause machen</value>
+  </data>
+  <data name="PauseEnd" xml:space="preserve">
+    <value>Zurück zur Arbeit</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Anfangen</value>
+  </data>
+  <data name="Stop" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="ExerciseSuggest" xml:space="preserve">
+    <value>Zeit für Augenübung</value>
+  </data>
+  <data name="ExerciseAccept" xml:space="preserve">
+    <value>Übung anfangen</value>
+  </data>
+  <data name="ExercisePostpone" xml:space="preserve">
+    <value>Später</value>
+  </data>
+  <data name="ExerciseEnd" xml:space="preserve">
+    <value>Übungen beenden</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Weiter</value>
+  </data>
 </root>
