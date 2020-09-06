@@ -1,6 +1,6 @@
-using System.Resources;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 
-[assembly: NeutralResourcesLanguage("en-US")]
+// no need to do it here. the attribute is already set in the project file
+//[assembly: NeutralResourcesLanguage("en")]

@@ -5,6 +5,7 @@
     <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
     <RootNamespace>com.on.relax.your.eyes.xam</RootNamespace>
     <AssemblyName>com.on.relax.your.eyes.xam</AssemblyName>
+    <NeutralLanguage>en-US</NeutralLanguage>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -40,9 +41,15 @@
     <EmbeddedResource Update="HelloPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.de-DE.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Update="Localization\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Localization\Strings.ru-RU.resx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Update="WorkPage.xaml">
       <Generator>MSBuild:Compile</Generator>

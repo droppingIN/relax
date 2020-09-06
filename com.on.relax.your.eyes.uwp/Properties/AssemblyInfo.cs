@@ -1,5 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime.CompilerServices;
+﻿using System.Resources;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following 
@@ -32,3 +32,5 @@ using System.Runtime.InteropServices;
 #else
 [assembly: AssemblyConfiguration("Release")]
 #endif
+
+[assembly: NeutralResourcesLanguage("en-US")]
