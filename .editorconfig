@@ -1,0 +1,9 @@
+﻿[*.cs]
+
+# IDE1005: Delegate invocation can be simplified.
+csharp_style_conditional_delegate_call = false:suggestion
+
+# GENERATEPROJECTPRIFILE : warning : PRI257: 0xdef00522 - Resources found for language(s) 'ru-ru,de,en' but no resources found for default language(s): 'ru-ru'
+# https://github.com/windows-toolkit/WindowsCommunityToolkit/issues/2947
+# https://stackoverflow.com/questions/44619115/cant-change-default-language-of-an-assembly-in-visual-studio-2017
+

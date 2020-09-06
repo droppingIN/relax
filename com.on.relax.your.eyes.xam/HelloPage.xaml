@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="com.on.relax.your.eyes.xam.HelloPage"
+             xmlns:resources="clr-namespace:com.on.relax.your.eyes.xam.Localization">
+    <ContentPage.Resources>
+        <x:Double x:Key="FontSize">42</x:Double>
+    </ContentPage.Resources>
+    <StackLayout
+        BackgroundColor="{AppThemeBinding
+            Light={StaticResource Primary},
+            Dark={StaticResource Secondary}
+        }"
+        VerticalOptions="FillAndExpand">
+        <Label
+            Text="{x:Static resources:Strings.Greeting}"
+            HorizontalTextAlignment="Center"
+            TextColor="{AppThemeBinding
+                Light={StaticResource Secondary},
+                Dark={StaticResource Primary}
+            }"
+            FontSize="{StaticResource FontSize}"
+            VerticalOptions="CenterAndExpand">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Label.GestureRecognizers>
+        </Label>
+        <Label
+            BackgroundColor="{StaticResource Secondary}"
+            Text="{x:Static resources:Strings.TapToContinue}"
+            HorizontalTextAlignment="Center"
+            TextColor="{StaticResource Primary}"
+            FontSize="{StaticResource FontSize}"
+            Opacity="0.5">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+            </Label.GestureRecognizers>
+        </Label>
+    </StackLayout>
+</ContentPage>
