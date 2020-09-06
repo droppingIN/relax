@@ -1,12 +1,55 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="com.on.relax.your.eyes.xam.WorkPage">
+             x:Class="com.on.relax.your.eyes.xam.WorkPage"
+             xmlns:resources="clr-namespace:com.on.relax.your.eyes.xam.Localization"
+             xmlns:logic="clr-namespace:com.on.relax.your.eyes.logic;assembly=com.on.relax.your.eyes.logic"
+             xmlns:local="clr-namespace:com.on.relax.your.eyes.xam"
+             BackgroundColor="{StaticResource Primary}">
+    <ContentPage.Resources>
+        <x:Double x:Key="LabelFontSize">24</x:Double>
+        <ResourceDictionary>
+            <local:StateToStringConverter x:Key="StateToString" />
+            <Style TargetType="Button">
+                <Setter Property="FontSize" Value="42"/>
+                <Setter Property="TextColor" Value="{StaticResource Secondary}"/>
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0"
+                   Grid.ColumnSpan="1"
+                   Text="{Binding Path=State, 
+                            Converter={StaticResource StateToString}}"
+                   TextColor="{StaticResource Secondary}"
+                   FontSize="{x:StaticResource LabelFontSize}"/>
+            <Button Grid.Row="1" Grid.Column="0"
+                    Text="{x:Static resources:Strings.Start}"
+                    Command="{Binding OnClick}"
+                    CommandParameter="{x:Static logic:Action.Start}"/>
+            <Button Grid.Row="1" Grid.Column="1"
+                    Text="{x:Static resources:Strings.Stop}"
+                    Command="{Binding OnClick}"
+                    CommandParameter="{x:Static logic:Action.Stop}"/>
+            <Button Grid.Row="2" Grid.Column="0"
+                    Text="{x:Static resources:Strings.PauseBegin}"
+                    Command="{Binding OnClick}"
+                    CommandParameter="{x:Static logic:Action.PauseBegin}"/>
+            <Button Grid.Row="2" Grid.Column="1"
+                    Text="{x:Static resources:Strings.PauseEnd}"
+                    Command="{Binding OnClick}"
+                    CommandParameter="{x:Static logic:Action.PauseEnd}"/>
+        </Grid>
     </ContentPage.Content>
 </ContentPage>
