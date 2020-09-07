@@ -20,8 +20,10 @@ namespace com.on.relax.your.eyes.xam
 
             OnClick = new Command<Action>((Action action) =>
             {
-                _ = sm.SwitchState(action);
-                OnPropertyChanged(nameof(State));
+                var previous = sm.State;
+                var newState = sm.SwitchState(action);
+                if(newState != previous)
+                    OnPropertyChanged(nameof(State));
             });
             BindingContext = this;
         }
