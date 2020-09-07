@@ -1,7 +1,15 @@
 ﻿namespace com.on.relax.your.eyes.xam
 {
-    internal class Settings
+
+    internal sealed class Settings
     {
-        public static bool SkipHello = false;
+        //singleton impl
+        static Settings() { }
+        private Settings() { }
+        public static Settings Instance { get; } = new Settings();
+
+        //all settings here:
+
+        public bool SkipHello = false;
     }
 }

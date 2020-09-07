@@ -9,28 +9,21 @@ namespace com.on.relax.your.eyes.xam
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class WorkPage : ContentPage
     {
-        private State state;
-        public State State
-        {
-            get => state;
-            set
-            {
-                if(value != state)
-                {
-                    state = value;
-                    OnPropertyChanged(nameof(State));
-                }
-            }
-        }
+        private IStateMachine sm;
+        public State State => sm.State;
 
         public WorkPage()
         {
             InitializeComponent();
-            State = StateMachineProvider.Get().State;
+
+            sm = StateMachineProvider.Get();
 
             OnClick = new Command<Action>((Action action) =>
             {
-                State = StateMachineProvider.Get().SwitchState(action);
+                var previous = sm.State;
+                var newState = sm.SwitchState(action);
+                if(newState != previous)
+                    OnPropertyChanged(nameof(State));
             });
             BindingContext = this;
         }
