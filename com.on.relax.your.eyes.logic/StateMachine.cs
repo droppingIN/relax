@@ -5,15 +5,15 @@ namespace com.on.relax.your.eyes.logic
     //(State, Action) is a lightweight tuple
     using TransitionMatrix = Dictionary<(State, Action), State>;
 
-    internal class StateMachine : IStateMachine
+    internal sealed class StateMachine : IStateMachine
     {
         public State State { get; private set; }
 
         private readonly TransitionMatrix transitionMatrix;
 
-        public StateMachine(in TransitionMatrix transitions)
+        internal StateMachine(in TransitionMatrix transitions, State initialState)
         {
-            State = State.Off;
+            State = initialState;
             transitionMatrix = transitions;
         }
 
