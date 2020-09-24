@@ -149,6 +149,10 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\com.on.relax.your.eyes.logic\com.on.relax.your.eyes.logic.csproj">
+      <Project>{A6262B7F-4966-4229-839C-16DE10156064}</Project>
+      <Name>com.on.relax.your.eyes.logic</Name>
+    </ProjectReference>
     <ProjectReference Include="..\com.on.relax.your.eyes.xam\com.on.relax.your.eyes.xam.csproj">
       <Project>{9D12DE43-CB86-4BBC-B00E-12405C5A5A8B}</Project>
       <Name>com.on.relax.your.eyes.xam</Name>

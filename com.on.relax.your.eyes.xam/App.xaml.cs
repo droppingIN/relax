@@ -6,21 +6,21 @@ namespace com.on.relax.your.eyes.xam
 {
     public partial class App : Application
     {
-        private PropertyHandler properties;
-        public App()
+        ISingleAlarm alarmHandler;
+        public App(ISingleAlarm alarmImpl)
         {
             InitializeComponent();
 
-            properties = new PropertyHandler(Current.Properties);
+            alarmHandler = alarmImpl;
+            ApplicationState.Init();
 
-            if (null == StateMachineProvider.Get())
+            var tryChangeState = new Command<Action>((Action action) =>
             {
-                InitStateMachine(Current, properties);
-            }
+                ApplicationState.TryChangeState(action, alarmImpl);
+            });
+            MainPage = new NavigationPage(new WorkPage(tryChangeState));
 
-            MainPage = new NavigationPage(new WorkPage(UserChangedState));
-
-            var skipHello = properties.Get(Settings.Instance.SkipHello, false);
+            var skipHello = Current.Properties.Get(Settings.Instance.SkipHello, false);
             if (!skipHello)
                 MainPage.Navigation.PushAsync(new HelloPage(CloseHelloPage));
         }
@@ -40,26 +40,7 @@ namespace com.on.relax.your.eyes.xam
         private void CloseHelloPage()
         {
             MainPage.Navigation.PopAsync();
-            properties.Set(Settings.Instance.SkipHello, true);
-            Current.SavePropertiesAsync();
-        }
-
-        private void InitStateMachine(Application current, PropertyHandler props)
-        {
-            var stateAtStartup = (State)properties.Get(Settings.Instance.StateKey, (int)State.Unknown);
-            if (State.Unknown == stateAtStartup)
-            {
-                stateAtStartup = State.Off;
-                props.Set(Settings.Instance.StateKey, (int)stateAtStartup);
-                current.SavePropertiesAsync();
-            }
-            StateMachineProvider.Initilaize(stateAtStartup);
-        }
-
-        [MethodImpl(MethodImplOptions.Synchronized)]
-        private void UserChangedState()
-        {
-            properties.Set(Settings.Instance.StateKey, (int)StateMachineProvider.Get().State);
+            Current.Properties.Set(Settings.Instance.SkipHello, true);
             Current.SavePropertiesAsync();
         }
     }
