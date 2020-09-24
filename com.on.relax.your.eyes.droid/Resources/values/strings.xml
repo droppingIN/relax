@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <string name="notification_channel_name">RelaxYourEyes</string>
+  <string name="notification_channel_description">Notification to open the activity for eyes gym</string>
+</resources>
+
