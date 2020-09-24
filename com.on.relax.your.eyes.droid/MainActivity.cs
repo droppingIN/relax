@@ -2,14 +2,23 @@
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Android.Content;
 
 namespace com.on.relax.your.eyes.droid
 {
-    [Activity(Label = "RelaxYourEyes", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize )]
+    [Activity(
+            Label = "RelaxYourEyes",
+            Icon = "@mipmap/icon",
+            Theme = "@style/MainTheme",
+            MainLauncher = true,
+            ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize
+    )]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            Notifications.CreateChannel(this);
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -19,13 +28,26 @@ namespace com.on.relax.your.eyes.droid
 
             if(!global::Xamarin.Forms.Forms.IsInitialized)
                 global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new com.on.relax.your.eyes.xam.App());
+
+            var alarmHandler = new AlarmImpl(this);
+            LoadApplication(new xam.App(alarmHandler));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public static Intent GetStartIntent(Context context)
+        {
+            Intent startMainActivityIntent;
+            startMainActivityIntent = new Intent(context.ApplicationContext, typeof(MainActivity));
+            startMainActivityIntent.SetAction(Intent.ActionMain);
+            //var flags = ActivityFlags.NewTask | ActivityFlags.ClearTop | ActivityFlags.ReorderToFront;
+            var flags = ActivityFlags.NewTask | ActivityFlags.ReorderToFront;
+            startMainActivityIntent.SetFlags(flags);
+            return startMainActivityIntent;
         }
     }
 }
