@@ -1,16 +1,25 @@
-﻿namespace com.on.relax.your.eyes.logic
+﻿using System;
+using System.Runtime.CompilerServices;
+namespace com.on.relax.your.eyes.logic
 {
-    //(State, Action) is a lightweight tuple
-    public static class StateMachineProvider
+    public sealed class StateMachineProvider
     {
+        //singleton impl
+        static StateMachineProvider() { }
+        private StateMachineProvider() { }
         private static IStateMachine theOnlyState = null;
         public static IStateMachine Get()
         {
-            if(null == theOnlyState)
-            {
-                theOnlyState = new StateMachine(StateMachine.InitialTransitions);
-            }
             return theOnlyState;
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static void Initilaize(State initialState)
+        {
+            if(null != theOnlyState)
+                throw new InvalidOperationException("State is already initialized!");
+            var default_transitions = StateMachine.InitialTransitions;
+            theOnlyState = new StateMachine(default_transitions, initialState);
         }
     }
 }

@@ -13,26 +13,21 @@ namespace com.on.relax.your.eyes.xam
             NavigationPage.SetHasBackButton(this, false);
         }
 
-        private Action tapped;
-
-        private void SignalizeAndResetHandler()
+        ~HelloPage()
         {
-            if (null != tapped)
-            {
-                tapped();
-                foreach (var invocation in tapped.GetInvocationList())
-                    tapped -= (Action)invocation;
-            }
+            tapped.ResetAll();
         }
+
+        private Action tapped;
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            SignalizeAndResetHandler();
+            tapped.FireAndReset();
         }
 
         protected override bool OnBackButtonPressed()
         {
-            SignalizeAndResetHandler();
+            tapped.FireAndReset();
             return base.OnBackButtonPressed();
         }
     }

@@ -5,30 +5,23 @@ namespace com.on.relax.your.eyes.logic
     //(State, Action) is a lightweight tuple
     using TransitionMatrix = Dictionary<(State, Action), State>;
 
-    internal class StateMachine : IStateMachine
+    internal sealed class StateMachine : IStateMachine
     {
         public State State { get; private set; }
 
         private readonly TransitionMatrix transitionMatrix;
 
-        public StateMachine(in TransitionMatrix transitions)
+        internal StateMachine(in TransitionMatrix transitions, State initialState)
         {
-            State = State.Off;
+            State = initialState;
             transitionMatrix = transitions;
         }
 
         public State SwitchState(Action action)
         {
-            try
-            {
-                var newState = transitionMatrix[(State, action)];
-                State = newState;
-            }
-            catch (KeyNotFoundException e)
-            {
-                var message = $"Transition not found for state: {State} , action: {action}";
-                Log.Warning(message, e);
-            }
+            var key = (State, action);
+            if (transitionMatrix.ContainsKey(key))
+                State = transitionMatrix[key];
             return State;
         }
 

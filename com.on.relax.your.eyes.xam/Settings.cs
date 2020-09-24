@@ -9,7 +9,9 @@
         public static Settings Instance { get; } = new Settings();
 
         //all settings here:
+        //main settings shoud not be renamed
+        public readonly string SkipHello = nameof(SkipHello);
 
-        public bool SkipHello = false;
+        public readonly string StateKey = nameof(StateKey);
     }
 }
