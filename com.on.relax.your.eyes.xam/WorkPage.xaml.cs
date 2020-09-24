@@ -11,23 +11,24 @@ namespace com.on.relax.your.eyes.xam
     public partial class WorkPage : ContentPage
     {
         private IStateMachine sm;
-        private Action OnStateChanged;
         public State State => sm.State;
+        private Command<UserAction> TryChangeState;
 
-        public WorkPage(Action stateChanged)
+        public WorkPage(Command<UserAction> requestStateChange)
         {
             InitializeComponent();
 
             sm = StateMachineProvider.Get();
-            OnStateChanged = stateChanged;
 
-            OnClick = new Command<UserAction>((UserAction action) =>
-            {
-                var previous = sm.State;
-                var newState = sm.SwitchState(action);
-                if(newState != previous)
+            TryChangeState = requestStateChange;
+            OnClick = new Command<UserAction>((UserAction action) => {
+                var currentState = sm.State;
+                TryChangeState.Execute(action);
+                var newState = sm.State;
+                if(currentState != newState)
+                {
                     OnPropertyChanged(nameof(State));
-                OnStateChanged();
+                }
             });
             BindingContext = this;
         }
