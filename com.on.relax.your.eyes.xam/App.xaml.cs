@@ -1,4 +1,5 @@
 using com.on.relax.your.eyes.logic;
+using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace com.on.relax.your.eyes.xam
@@ -17,7 +18,7 @@ namespace com.on.relax.your.eyes.xam
                 InitStateMachine(Current, properties);
             }
 
-            MainPage = new NavigationPage(new WorkPage());
+            MainPage = new NavigationPage(new WorkPage(UserChangedState));
 
             var skipHello = properties.Get(Settings.Instance.SkipHello, false);
             if (!skipHello)
@@ -53,6 +54,13 @@ namespace com.on.relax.your.eyes.xam
                 current.SavePropertiesAsync();
             }
             StateMachineProvider.Initilaize(stateAtStartup);
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        private void UserChangedState()
+        {
+            properties.Set(Settings.Instance.StateKey, (int)StateMachineProvider.Get().State);
+            Current.SavePropertiesAsync();
         }
     }
 }
