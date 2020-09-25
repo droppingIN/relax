@@ -7,30 +7,30 @@ namespace com.on.relax.your.eyes.droid
 {
     public class AlarmImpl : ISingleAlarm
     {
-        private ContextWrapper context;
-        private PendingIntent alarmIntent = null;
-        private AlarmManager alarmManager = null;
+        private readonly ContextWrapper _context;
+        private PendingIntent _alarmIntent;
+        private AlarmManager _alarmManager;
 
         public AlarmImpl(ContextWrapper context)
         {
-            this.context = context;
+            _context = context;
         }
 
         private AlarmManager GetLazyAlarmManager()
         {
-            if (null == alarmManager)
-                alarmManager = (AlarmManager)context.GetSystemService(Context.AlarmService);
-            return alarmManager;
+            if (null == _alarmManager)
+                _alarmManager = (AlarmManager)_context.GetSystemService(Context.AlarmService);
+            return _alarmManager;
         }
 
         private PendingIntent GetLazyAlarmIntent()
         {
-            if (null == alarmIntent)
+            if (null == _alarmIntent)
             {
-                var intent = new Intent(context, typeof(EyesGymReceiver));
-                alarmIntent = PendingIntent.GetBroadcast(context, 0, intent, 0);
+                var intent = new Intent(_context, typeof(EyesGymReceiver));
+                _alarmIntent = PendingIntent.GetBroadcast(_context, 0, intent, 0);
             }
-            return alarmIntent;
+            return _alarmIntent;
         }
 
         public void ScheduleSingleAlarm(long intervalMs)

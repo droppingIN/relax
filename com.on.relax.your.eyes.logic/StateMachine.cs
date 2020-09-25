@@ -9,19 +9,19 @@ namespace com.on.relax.your.eyes.logic
     {
         public State State { get; private set; }
 
-        private readonly TransitionMatrix transitionMatrix;
+        private readonly TransitionMatrix _transitionMatrix;
 
         internal StateMachine(in TransitionMatrix transitions, State initialState)
         {
             State = initialState;
-            transitionMatrix = transitions;
+            _transitionMatrix = transitions;
         }
 
         public State SwitchState(Action action)
         {
             var key = (State, action);
-            if (transitionMatrix.ContainsKey(key))
-                State = transitionMatrix[key];
+            if (_transitionMatrix.ContainsKey(key))
+                State = _transitionMatrix[key];
             return State;
         }
 
@@ -29,6 +29,7 @@ namespace com.on.relax.your.eyes.logic
         {
             get
             {
+                // ReSharper disable once UseObjectOrCollectionInitializer
                 var matrix = new TransitionMatrix();
                 // Lifecycle
                 matrix[(State.Off, Action.Start)] = State.On;

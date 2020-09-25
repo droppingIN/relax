@@ -10,6 +10,8 @@ namespace com.on.relax.your.eyes.uwp
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
+    // ReSharper disable once RedundantExtendsListEntry
+    // ReSharper disable once UnusedMember.Global
     sealed partial class App : Application
     {
         /// <summary>

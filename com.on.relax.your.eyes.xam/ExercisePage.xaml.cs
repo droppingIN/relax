@@ -5,12 +5,13 @@ using Xamarin.Forms.Xaml;
 namespace com.on.relax.your.eyes.xam
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class ExercisePage : ContentPage
     {
-        public ExerciseViewModel CurrentExcercise { get; private set; }
+        public ExerciseViewModel CurrentExercise { get; }
         public ExercisePage(ExerciseViewModel viewModel)
         {
-            CurrentExcercise = viewModel;
+            CurrentExercise = viewModel;
             InitializeComponent();
         }
     }

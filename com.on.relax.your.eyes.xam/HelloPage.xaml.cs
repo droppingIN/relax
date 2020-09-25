@@ -3,11 +3,12 @@ using Xamarin.Forms;
 
 namespace com.on.relax.your.eyes.xam
 {
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class HelloPage : ContentPage
     {
         public HelloPage(Action onAnyTapped)
         {
-            tapped += onAnyTapped;
+            _tapped += onAnyTapped;
             InitializeComponent();
             NavigationPage.SetHasNavigationBar(this, false);
             NavigationPage.SetHasBackButton(this, false);
@@ -15,19 +16,19 @@ namespace com.on.relax.your.eyes.xam
 
         ~HelloPage()
         {
-            tapped.ResetAll();
+            _tapped.ResetAll();
         }
 
-        private Action tapped;
+        private readonly Action _tapped;
 
         private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            tapped.FireAndReset();
+            _tapped.FireAndReset();
         }
 
         protected override bool OnBackButtonPressed()
         {
-            tapped.FireAndReset();
+            _tapped.FireAndReset();
             return base.OnBackButtonPressed();
         }
     }

@@ -18,7 +18,7 @@ namespace com.on.relax.your.eyes.xam
                     app.Properties.Set(Settings.Instance.StateKey, (int)stateAtStartup);
                     app.SavePropertiesAsync();
                 }
-                StateMachineProvider.Initilaize(stateAtStartup);
+                StateMachineProvider.Initialize(stateAtStartup);
             }
         }
 
@@ -40,7 +40,7 @@ namespace com.on.relax.your.eyes.xam
                         alarmHandler.CancelSingleAlarm();
                         break;
                     case State.Pause:
-                        //hold alarm: start counting current pause time, then rescedule the alarm to later time
+                        //hold alarm: start counting current pause time, then reschedule the alarm to later time
                         break;
                     case State.ExerciseSuggested:
                         //show dialog to accept or postpone the exercise, hold alarm

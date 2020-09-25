@@ -1,5 +1,4 @@
 ﻿using com.on.relax.your.eyes.logic;
-using Xamarin.Forms;
 
 namespace com.on.relax.your.eyes.uwp
 {
