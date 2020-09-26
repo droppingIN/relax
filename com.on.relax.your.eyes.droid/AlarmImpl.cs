@@ -44,6 +44,7 @@ namespace com.on.relax.your.eyes.droid
         public void CancelSingleAlarm()
         {
             GetLazyAlarmIntent().Cancel();
+            _alarmIntent = null;
         }
     }
 }
