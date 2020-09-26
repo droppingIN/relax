@@ -1,20 +1,21 @@
 using com.on.relax.your.eyes.logic;
-using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 
 namespace com.on.relax.your.eyes.xam
 {
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class App : Application
     {
-        ISingleAlarm alarmHandler;
+        public ISingleAlarm AlarmHandler { get; }
+
         public App(ISingleAlarm alarmImpl)
         {
             InitializeComponent();
 
-            alarmHandler = alarmImpl;
+            AlarmHandler = alarmImpl;
             ApplicationState.Init();
 
-            var tryChangeState = new Command<Action>((Action action) =>
+            var tryChangeState = new Command<Action>(action =>
             {
                 ApplicationState.TryChangeState(action, alarmImpl);
             });

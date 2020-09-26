@@ -9,11 +9,11 @@ namespace com.on.relax.your.eyes.xam
 {
     public class StateToStringConverter : IValueConverter
     {
-        Dictionary<State, string> stateMap;
+        readonly Dictionary<State, string> _stateMap;
 
         public StateToStringConverter()
         {
-            stateMap = new Dictionary<State, string>()
+            _stateMap = new Dictionary<State, string>()
             {
                 { State.Off, Strings.Off },
                 { State.On, Strings.On },
@@ -26,7 +26,7 @@ namespace com.on.relax.your.eyes.xam
 
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            return stateMap[(State)value];
+            return _stateMap[(State)value];
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

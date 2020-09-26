@@ -3,28 +3,26 @@ using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using UserAction = com.on.relax.your.eyes.logic.Action;
-using Action = System.Action;
 
 namespace com.on.relax.your.eyes.xam
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    // ReSharper disable once RedundantExtendsListEntry
     public partial class WorkPage : ContentPage
     {
-        private IStateMachine sm;
-        public State State => sm.State;
-        private Command<UserAction> TryChangeState;
+        private readonly IStateMachine _sm;
+        public State State => _sm.State;
 
         public WorkPage(Command<UserAction> requestStateChange)
         {
             InitializeComponent();
 
-            sm = StateMachineProvider.Get();
+            _sm = StateMachineProvider.Get();
 
-            TryChangeState = requestStateChange;
-            OnClick = new Command<UserAction>((UserAction action) => {
-                var currentState = sm.State;
-                TryChangeState.Execute(action);
-                var newState = sm.State;
+            OnClick = new Command<UserAction>(action => {
+                var currentState = _sm.State;
+                requestStateChange.Execute(action);
+                var newState = _sm.State;
                 if(currentState != newState)
                 {
                     OnPropertyChanged(nameof(State));
@@ -33,6 +31,6 @@ namespace com.on.relax.your.eyes.xam
             BindingContext = this;
         }
 
-        public ICommand OnClick { private set; get; }
+        public ICommand OnClick { get; }
     }
 }

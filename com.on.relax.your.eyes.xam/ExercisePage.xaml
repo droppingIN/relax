@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="com.on.relax.your.eyes.xam.ExercisePage"
-             BindingContext="{Binding Source={RelativeSource Self}, Path=CurrentExcercise}"
+             BindingContext="{Binding Source={RelativeSource Self}, Path=CurrentExercise}"
              BackgroundColor="{StaticResource Primary}">
     <ContentPage.Resources>
         <x:Double x:Key="FontSize">42</x:Double>

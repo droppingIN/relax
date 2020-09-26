@@ -2,24 +2,24 @@
 using System.Runtime.CompilerServices;
 namespace com.on.relax.your.eyes.logic
 {
-    public sealed class StateMachineProvider
+    public static class StateMachineProvider
     {
         //singleton impl
+        // ReSharper disable once EmptyConstructor
         static StateMachineProvider() { }
-        private StateMachineProvider() { }
-        private static IStateMachine theOnlyState = null;
+        private static IStateMachine _theOnlyState;
         public static IStateMachine Get()
         {
-            return theOnlyState;
+            return _theOnlyState;
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void Initilaize(State initialState)
+        public static void Initialize(State initialState)
         {
-            if(null != theOnlyState)
+            if(null != _theOnlyState)
                 throw new InvalidOperationException("State is already initialized!");
-            var default_transitions = StateMachine.InitialTransitions;
-            theOnlyState = new StateMachine(default_transitions, initialState);
+            var defaultTransitions = StateMachine.InitialTransitions;
+            _theOnlyState = new StateMachine(defaultTransitions, initialState);
         }
     }
 }

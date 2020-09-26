@@ -1,8 +1,9 @@
 ﻿using System.Runtime.CompilerServices;
 
+// ReSharper disable once CheckNamespace
 namespace System
 {
-    public static partial class ActionExtension
+    public static class ActionExtension
     {
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static void FireAndReset(this Action handler)

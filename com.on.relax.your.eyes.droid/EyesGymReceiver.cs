@@ -1,6 +1,5 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Support.V4.App;
 using Debug = System.Diagnostics.Debug;
 
@@ -32,7 +31,7 @@ namespace com.on.relax.your.eyes.droid
             var intent = MainActivity.GetStartIntent(context);
             var pendingIntent = PendingIntent.GetActivity(context, pendingIntentId, intent, flags);
 
-            var builder = new NotificationCompat.Builder(context, Notifications.GLOBAL_CHANNEL_ID)
+            var builder = new NotificationCompat.Builder(context, Notifications.GlobalChannelId)
                 .SetContentTitle("Time to relax your eyes!")//todo resource
                 .SetContentText("Hello World! This is my first notification!")//todo resource
                 .SetDefaults((int)(NotificationDefaults.Sound | NotificationDefaults.Vibrate))
@@ -40,10 +39,11 @@ namespace com.on.relax.your.eyes.droid
                 .SetContentIntent(pendingIntent);
 
             Notification notification = builder.Build();
-            var notificationManager = context.GetSystemService(Context.NotificationService) as NotificationManager;
+            var notificationManager = (NotificationManager) context.GetSystemService(Context.NotificationService);
 
             const int notificationId = 0;
-            notificationManager.Notify(notificationId, notification);
+            if (null != notificationManager)
+                notificationManager.Notify(notificationId, notification);
         }
 
         //if(null != startMainActivityIntent.ResolveActivity(context.PackageManager))

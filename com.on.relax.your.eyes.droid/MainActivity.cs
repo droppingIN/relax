@@ -26,13 +26,13 @@ namespace com.on.relax.your.eyes.droid
 
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
 
-            if(!global::Xamarin.Forms.Forms.IsInitialized)
-                global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            if(!Xamarin.Forms.Forms.IsInitialized)
+                Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
             var alarmHandler = new AlarmImpl(this);
             LoadApplication(new xam.App(alarmHandler));
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
@@ -41,8 +41,7 @@ namespace com.on.relax.your.eyes.droid
 
         public static Intent GetStartIntent(Context context)
         {
-            Intent startMainActivityIntent;
-            startMainActivityIntent = new Intent(context.ApplicationContext, typeof(MainActivity));
+            var startMainActivityIntent = new Intent(context, typeof(MainActivity));
             startMainActivityIntent.SetAction(Intent.ActionMain);
             //var flags = ActivityFlags.NewTask | ActivityFlags.ClearTop | ActivityFlags.ReorderToFront;
             var flags = ActivityFlags.NewTask | ActivityFlags.ReorderToFront;
