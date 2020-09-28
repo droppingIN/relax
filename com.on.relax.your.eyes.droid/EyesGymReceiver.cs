@@ -1,6 +1,6 @@
 ﻿using Android.App;
 using Android.Content;
-using Android.Support.V4.App;
+using com.on.relax.your.eyes.logic;
 using Debug = System.Diagnostics.Debug;
 
 namespace com.on.relax.your.eyes.droid
@@ -15,37 +15,36 @@ namespace com.on.relax.your.eyes.droid
     {
         public override void OnReceive(Context context, Intent intent)
         {
-            //todo show notification?
             if (null == context)
                 Debug.WriteLine("WARNING: context is null");
             else
             {
-                ShowNotification(context);
+                var extra = intent.GetStringExtra(nameof(UserDialog));
+                if (null != extra && UserDialog.ExercisePostpone.ToString() == extra)
+                {
+                    var flags = PendingIntentFlags.UpdateCurrent;
+                    var id = (int)UserDialog.ExercisePostpone;
+                    var pending = PendingIntent.GetBroadcast(context, id, intent, flags);
+                    if (null != pending)
+                        pending.Cancel();
+                    Notifications.Cancel(context);
+                }
+                else
+                {
+                    var startIntent = IntentFactory.GetPending(context, UserDialog.Start);
+                    var postponeIntent = IntentFactory.GetPending(context, UserDialog.ExercisePostpone);
+
+                    var title = "hey! time to eyes gym!";
+                    var text = "press start to do the eyes gym or postpone to reschedule the alarm";
+                    var builder = Notifications.GetBuilder(context, startIntent, title, text);
+
+                    builder.AddAction(Resource.Drawable.ic_media_pause, "postpone", postponeIntent);
+                    builder.AddAction(Resource.Drawable.ic_menu_view, "start", startIntent);
+
+                    Notifications.Show(context, builder);
+                }
             }
         }
-
-        void ShowNotification(Context context)
-        {
-            const int pendingIntentId = 0;
-            const PendingIntentFlags flags = PendingIntentFlags.OneShot;
-            var intent = MainActivity.GetStartIntent(context);
-            var pendingIntent = PendingIntent.GetActivity(context, pendingIntentId, intent, flags);
-
-            var builder = new NotificationCompat.Builder(context, Notifications.GlobalChannelId)
-                .SetContentTitle("Time to relax your eyes!")//todo resource
-                .SetContentText("Hello World! This is my first notification!")//todo resource
-                .SetDefaults((int)(NotificationDefaults.Sound | NotificationDefaults.Vibrate))
-                .SetSmallIcon(Resource.Drawable.ic_menu_info_details)
-                .SetContentIntent(pendingIntent);
-
-            Notification notification = builder.Build();
-            var notificationManager = (NotificationManager) context.GetSystemService(Context.NotificationService);
-
-            const int notificationId = 0;
-            if (null != notificationManager)
-                notificationManager.Notify(notificationId, notification);
-        }
-
         //if(null != startMainActivityIntent.ResolveActivity(context.PackageManager))
         //{
         //context.StartActivity(startMainActivityIntent);
