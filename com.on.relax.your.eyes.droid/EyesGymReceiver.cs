@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using com.on.relax.your.eyes.logic;
 using com.@on.relax.your.eyes.xam.Localization;
@@ -14,6 +15,8 @@ namespace com.on.relax.your.eyes.droid
     ]
     public class EyesGymReceiver : BroadcastReceiver
     {
+        private const UserDialog PostponeDialog = UserDialog.ExercisePostpone;
+        private const UserDialog AcceptDialog = UserDialog.ExerciseAccept;
         public override void OnReceive(Context context, Intent intent)
         {
             if (null == context)
@@ -21,19 +24,29 @@ namespace com.on.relax.your.eyes.droid
             else
             {
                 var extra = intent.GetStringExtra(nameof(UserDialog));
-                if (null != extra && UserDialog.ExercisePostpone.ToString() == extra)
+                if (null != extra)
                 {
-                    var flags = PendingIntentFlags.UpdateCurrent;
-                    var id = (int)UserDialog.ExercisePostpone;
-                    var pending = PendingIntent.GetBroadcast(context, id, intent, flags);
-                    if (null != pending)
-                        pending.Cancel();
+                    var extraAsEnum = Enum.Parse(typeof(UserDialog), extra);
+                    switch(extraAsEnum)
+                    {
+                        case PostponeDialog:
+                            var flags = PendingIntentFlags.UpdateCurrent;
+                            var id = (int)UserDialog.ExercisePostpone;
+                            var pending = PendingIntent.GetBroadcast(context, id, intent, flags);
+                            if (null != pending)
+                                pending.Cancel();
+                            break;
+                        case AcceptDialog:
+                            var mainActivityIntent = IntentFactory.GetStartIntent(context);
+                            context.StartActivity(mainActivityIntent);
+                            break;
+                    }
                     Notifications.Cancel(context);
                 }
                 else
                 {
-                    var startIntent = IntentFactory.GetPending(context, UserDialog.Start);
-                    var postponeIntent = IntentFactory.GetPending(context, UserDialog.ExercisePostpone);
+                    var startIntent = IntentFactory.GetPending(context, AcceptDialog, typeof(EyesGymReceiver));
+                    var postponeIntent = IntentFactory.GetPending(context, PostponeDialog, typeof(EyesGymReceiver));
 
                     var title = Strings.ExerciseSuggest;
                     var text = "You are working: " ; // todo hours of work in text here

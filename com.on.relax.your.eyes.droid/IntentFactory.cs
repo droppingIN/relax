@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System;
+using Android.App;
 using Android.Content;
 using com.on.relax.your.eyes.logic;
 
@@ -8,15 +9,15 @@ namespace com.on.relax.your.eyes.droid
     {
         private const PendingIntentFlags OneShot = PendingIntentFlags.OneShot;
 
-        public static PendingIntent GetPending(Context context, UserDialog id)
+        public static PendingIntent GetPending(Context context, UserDialog id, Type typeToIntent)
         {
-            if (UserDialog.ExercisePostpone == id)
-                return GetPostponePending(context, id);
-
-            return GetStartActivityPending(context, id);
+            var intent = new Intent(context, typeToIntent);
+            intent.PutExtra(nameof(UserDialog), id.ToString());
+            var pendingIntent =  PendingIntent.GetBroadcast(context, (int)id, intent, OneShot);
+            return pendingIntent;
         }
 
-        private static Intent GetStartIntent(Context context)
+        public static Intent GetStartIntent(Context context)
         {
             var startMainActivityIntent = new Intent(context, typeof(MainActivity));
             startMainActivityIntent.SetAction(Intent.ActionMain);
@@ -26,18 +27,10 @@ namespace com.on.relax.your.eyes.droid
             return startMainActivityIntent;
         }
 
-        private static PendingIntent GetStartActivityPending(Context context, UserDialog id)
+        public static PendingIntent GetStartActivityPending(Context context, UserDialog id)
         {
             var intent = GetStartIntent(context);
             var pendingIntent = PendingIntent.GetActivity(context, (int)id, intent, OneShot);
-            return pendingIntent;
-        }
-
-        private static PendingIntent GetPostponePending(Context context, UserDialog id)
-        {
-            var intent = new Intent(context, typeof(EyesGymReceiver));
-            intent.PutExtra(nameof(UserDialog), id.ToString());
-            var pendingIntent =  PendingIntent.GetBroadcast(context, (int)id, intent, OneShot);
             return pendingIntent;
         }
     }
