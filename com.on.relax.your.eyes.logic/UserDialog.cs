@@ -1,6 +1,6 @@
 ﻿namespace com.on.relax.your.eyes.logic
 {
-    public enum Action
+    public enum UserDialog
     {
         Start,
         Stop,

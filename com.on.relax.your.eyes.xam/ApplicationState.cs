@@ -23,7 +23,7 @@ namespace com.on.relax.your.eyes.xam
         }
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void TryChangeState(Action requested, ISingleAlarm alarmHandler)
+        public static void TryChangeState(UserDialog requested, ISingleAlarm alarmHandler)
         {
             var sm = StateMachineProvider.Get();
             var previous = sm.State;
