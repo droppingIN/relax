@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.Content;
 using com.on.relax.your.eyes.logic;
+using com.@on.relax.your.eyes.xam.Localization;
 using Debug = System.Diagnostics.Debug;
 
 namespace com.on.relax.your.eyes.droid
@@ -34,12 +35,12 @@ namespace com.on.relax.your.eyes.droid
                     var startIntent = IntentFactory.GetPending(context, UserDialog.Start);
                     var postponeIntent = IntentFactory.GetPending(context, UserDialog.ExercisePostpone);
 
-                    var title = "hey! time to eyes gym!";
-                    var text = "press start to do the eyes gym or postpone to reschedule the alarm";
+                    var title = Strings.ExerciseSuggest;
+                    var text = "You are working: " ; // todo hours of work in text here
                     var builder = Notifications.GetBuilder(context, startIntent, title, text);
 
-                    builder.AddAction(Resource.Drawable.ic_media_pause, "postpone", postponeIntent);
-                    builder.AddAction(Resource.Drawable.ic_menu_view, "start", startIntent);
+                    builder.AddAction(Resource.Drawable.ic_media_pause, Strings.ExercisePostpone, postponeIntent);
+                    builder.AddAction(Resource.Drawable.ic_menu_view, Strings.ExerciseAccept, startIntent);
 
                     Notifications.Show(context, builder);
                 }
