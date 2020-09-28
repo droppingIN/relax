@@ -36,19 +36,19 @@
             <Button Grid.Row="1" Grid.Column="0"
                     Text="{x:Static resources:Strings.Start}"
                     Command="{Binding OnClick}"
-                    CommandParameter="{x:Static logic:Action.Start}"/>
+                    CommandParameter="{x:Static logic:UserDialog.Start}"/>
             <Button Grid.Row="1" Grid.Column="1"
                     Text="{x:Static resources:Strings.Stop}"
                     Command="{Binding OnClick}"
-                    CommandParameter="{x:Static logic:Action.Stop}"/>
+                    CommandParameter="{x:Static logic:UserDialog.Stop}"/>
             <Button Grid.Row="2" Grid.Column="0"
                     Text="{x:Static resources:Strings.PauseBegin}"
                     Command="{Binding OnClick}"
-                    CommandParameter="{x:Static logic:Action.PauseBegin}"/>
+                    CommandParameter="{x:Static logic:UserDialog.PauseBegin}"/>
             <Button Grid.Row="2" Grid.Column="1"
                     Text="{x:Static resources:Strings.PauseEnd}"
                     Command="{Binding OnClick}"
-                    CommandParameter="{x:Static logic:Action.PauseEnd}"/>
+                    CommandParameter="{x:Static logic:UserDialog.PauseEnd}"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

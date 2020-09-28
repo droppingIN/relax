@@ -1,6 +1,5 @@
 ﻿namespace com.on.relax.your.eyes.xam
 {
-
     internal sealed class Settings
     {
         //singleton impl

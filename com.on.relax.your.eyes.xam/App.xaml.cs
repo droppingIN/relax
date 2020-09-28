@@ -15,7 +15,7 @@ namespace com.on.relax.your.eyes.xam
             AlarmHandler = alarmImpl;
             ApplicationState.Init();
 
-            var tryChangeState = new Command<Action>(action =>
+            var tryChangeState = new Command<UserDialog>(action =>
             {
                 ApplicationState.TryChangeState(action, alarmImpl);
             });

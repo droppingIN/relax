@@ -2,7 +2,6 @@
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
-using Android.Content;
 
 namespace com.on.relax.your.eyes.droid
 {
@@ -37,16 +36,6 @@ namespace com.on.relax.your.eyes.droid
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-
-        public static Intent GetStartIntent(Context context)
-        {
-            var startMainActivityIntent = new Intent(context, typeof(MainActivity));
-            startMainActivityIntent.SetAction(Intent.ActionMain);
-            //var flags = ActivityFlags.NewTask | ActivityFlags.ClearTop | ActivityFlags.ReorderToFront;
-            var flags = ActivityFlags.NewTask | ActivityFlags.ReorderToFront;
-            startMainActivityIntent.SetFlags(flags);
-            return startMainActivityIntent;
         }
     }
 }

@@ -2,8 +2,8 @@
 
 namespace com.on.relax.your.eyes.logic
 {
-    //(State, Action) is a lightweight tuple
-    using TransitionMatrix = Dictionary<(State, Action), State>;
+    //(State, UserDialog) is a lightweight tuple
+    using TransitionMatrix = Dictionary<(State, UserDialog), State>;
 
     internal sealed class StateMachine : IStateMachine
     {
@@ -17,9 +17,9 @@ namespace com.on.relax.your.eyes.logic
             _transitionMatrix = transitions;
         }
 
-        public State SwitchState(Action action)
+        public State SwitchState(UserDialog userDialog)
         {
-            var key = (State, action);
+            var key = (State, action: userDialog);
             if (_transitionMatrix.ContainsKey(key))
                 State = _transitionMatrix[key];
             return State;
@@ -32,17 +32,17 @@ namespace com.on.relax.your.eyes.logic
                 // ReSharper disable once UseObjectOrCollectionInitializer
                 var matrix = new TransitionMatrix();
                 // Lifecycle
-                matrix[(State.Off, Action.Start)] = State.On;
-                matrix[(State.On, Action.Stop)] = State.Off;
-                matrix[(State.Pause, Action.Stop)] = State.Off;
+                matrix[(State.Off, UserDialog.Start)] = State.On;
+                matrix[(State.On, UserDialog.Stop)] = State.Off;
+                matrix[(State.Pause, UserDialog.Stop)] = State.Off;
                 // Pause
-                matrix[(State.On, Action.PauseBegin)] = State.Pause;
-                matrix[(State.Pause, Action.PauseEnd)] = State.On;
+                matrix[(State.On, UserDialog.PauseBegin)] = State.Pause;
+                matrix[(State.Pause, UserDialog.PauseEnd)] = State.On;
                 // Exercise
-                matrix[(State.On, Action.ExerciseSuggest)] = State.ExerciseSuggested;
-                matrix[(State.ExerciseSuggested, Action.ExerciseAccept)] = State.Exercise;
-                matrix[(State.ExerciseSuggested, Action.ExercisePostpone)] = State.On;
-                matrix[(State.Exercise, Action.ExerciseEnd)] = State.On;
+                matrix[(State.On, UserDialog.ExerciseSuggest)] = State.ExerciseSuggested;
+                matrix[(State.ExerciseSuggested, UserDialog.ExerciseAccept)] = State.Exercise;
+                matrix[(State.ExerciseSuggested, UserDialog.ExercisePostpone)] = State.On;
+                matrix[(State.Exercise, UserDialog.ExerciseEnd)] = State.On;
                 return matrix;
             }
         }

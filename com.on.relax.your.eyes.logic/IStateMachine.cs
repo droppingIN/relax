@@ -2,7 +2,7 @@
 {
     public interface IStateMachine
     {
-        State SwitchState(Action action);
+        State SwitchState(UserDialog userDialog);
         State State { get; }
     }
 }
