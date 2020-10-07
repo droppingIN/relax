@@ -2,7 +2,7 @@
 {
     public interface ISingleAlarm
     {
-        void ScheduleSingleAlarm(long intervalMs);
+        void ScheduleSingleAlarm(long nextAlarmInMs);
         void CancelSingleAlarm();
     }
 }

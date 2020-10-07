@@ -10,7 +10,7 @@ namespace com.on.relax.your.eyes.uwp
             throw new System.NotImplementedException();
         }
 
-        public void ScheduleSingleAlarm(long intervalMs)
+        public void ScheduleSingleAlarm(long nextAlarmInMs)
         {
             throw new System.NotImplementedException();
         }
