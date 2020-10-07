@@ -60,7 +60,9 @@ namespace com.on.relax.your.eyes.droid
         public static void Cancel(Context context)
         {
             var notificationManager = (NotificationManager) context.GetSystemService(Context.NotificationService);
-            notificationManager.Cancel(NotificationId);
+
+            if (null != notificationManager)
+                notificationManager.Cancel(NotificationId);
         }
     }
 }
