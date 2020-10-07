@@ -30,17 +30,19 @@ namespace com.on.relax.your.eyes.xam
             var newState = sm.SwitchState(requested);
             if (newState != previous)
             {
+                var nextAlarmInMs = 15000;
                 switch (newState)
                 {
                     case State.On:
                         //pause to on will reschedule alarm
-                        alarmHandler.ScheduleSingleAlarm(5000);
+                        alarmHandler.ScheduleSingleAlarm(nextAlarmInMs);
                         break;
                     case State.Off:
                         alarmHandler.CancelSingleAlarm();
                         break;
                     case State.Pause:
                         //hold alarm: start counting current pause time, then reschedule the alarm to later time
+                        alarmHandler.CancelSingleAlarm();
                         break;
                     case State.ExerciseSuggested:
                         //show dialog to accept or postpone the exercise, hold alarm
