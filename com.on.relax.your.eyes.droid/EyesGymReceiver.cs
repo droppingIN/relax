@@ -2,7 +2,7 @@
 using Android.App;
 using Android.Content;
 using com.on.relax.your.eyes.logic;
-using com.@on.relax.your.eyes.xam.Localization;
+using com.on.relax.your.eyes.xam.Localization;
 using Debug = System.Diagnostics.Debug;
 
 namespace com.on.relax.your.eyes.droid
@@ -33,10 +33,18 @@ namespace com.on.relax.your.eyes.droid
             }
             
             var extraAsEnum = (UserDialog)Enum.Parse(typeof(UserDialog), extra);
-            if(AcceptDialog == extraAsEnum)
+            switch (extraAsEnum)
             {
-                var mainActivityIntent = IntentFactory.GetStartIntent(context);
-                context.StartActivity(mainActivityIntent);
+                case AcceptDialog:
+                    //todo change state and then start activity
+                    var mainActivityIntent = IntentFactory.GetStartIntent(context);
+                    context.StartActivity(mainActivityIntent);
+                    break;
+                case PostponeDialog:
+                    var alarm = new AlarmImpl(new ContextWrapper(context.ApplicationContext));
+                    var nextAlarmInMs = 5000;
+                    alarm.ScheduleSingleAlarm(nextAlarmInMs);
+                    break;
             }
 
             CancelPending(context, intent, (int)extraAsEnum);

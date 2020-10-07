@@ -23,7 +23,7 @@ namespace com.on.relax.your.eyes.droid
             return _alarmManager;
         }
 
-        private PendingIntent GetLazyAlarmIntent()
+        private PendingIntent GetLazyAlarmPendingIntent()
         {
             if (null == _alarmIntent)
             {
@@ -33,17 +33,25 @@ namespace com.on.relax.your.eyes.droid
             return _alarmIntent;
         }
 
-        public void ScheduleSingleAlarm(long intervalMs)
+        public void ScheduleSingleAlarm(long nextAlarmInMs)
         {
             var alarmType = AlarmType.ElapsedRealtimeWakeup;
-            var nextAlarmAt = SystemClock.ElapsedRealtime() + intervalMs;
-            GetLazyAlarmManager().SetRepeating(alarmType, nextAlarmAt, intervalMs, GetLazyAlarmIntent());
-            //GetLazyAlarmManager().SetInexactRepeating(alarmType, nextAlarmAt, intervalMs, GetLazyAlarmIntent());
+            var nextAlarmAt = SystemClock.ElapsedRealtime() + nextAlarmInMs;
+            var manager = GetLazyAlarmManager();
+            var pendingIntent = GetLazyAlarmPendingIntent();
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.M) {
+                manager.SetExactAndAllowWhileIdle(alarmType, nextAlarmAt, pendingIntent);
+            } else if (Build.VERSION.SdkInt >= BuildVersionCodes.Kitkat) {
+                manager.SetExact(alarmType, nextAlarmAt, pendingIntent);
+            } else {
+                manager.Set(alarmType, nextAlarmAt, pendingIntent);
+            }
+            //GetLazyAlarmManager().SetInexactRepeating(alarmType, nextAlarmAt, intervalMs, GetLazyAlarmPendingIntent());
         }
 
         public void CancelSingleAlarm()
         {
-            GetLazyAlarmIntent().Cancel();
+            GetLazyAlarmPendingIntent().Cancel();
             _alarmIntent = null;
         }
     }
